@@ -114,7 +114,7 @@ const App = () => {
                 element={
                   <ProtectedRoute
                     isAuthenticated={!isAuthenticated}
-                    redirect={"/"}>
+                    redirect={"/verify"}>
                     <Register />
                   </ProtectedRoute>
                 }

@@ -1,6 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { register } from "../redux/actions/userAction";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 
@@ -13,19 +13,11 @@ const Register = () => {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const inputRef = useRef(null);
-
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleToggleShowPassword = () => {
-    inputRef.current?.focus();
-    toggleShowPassword();
-  };
-
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const changeImageHandler = (e) => {
     const file = e.target.files[0];
@@ -49,7 +41,6 @@ const Register = () => {
     myForm.append("avatar", image);
 
     dispatch(register(myForm));
-    navigate("/verify");
   };
 
   return (
@@ -86,11 +77,10 @@ const Register = () => {
             type={showPassword ? "text" : "password"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            ref={inputRef}
             placeholder="Password"
             className="border-none outline-none bg-transparent flex-grow"
           />
-          <button onClick={handleToggleShowPassword}>
+          <button type="button" onClick={toggleShowPassword}>
             {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
           </button>
         </div>
