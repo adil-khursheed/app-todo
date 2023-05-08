@@ -136,3 +136,48 @@ export const deleteTask = (taskId) => async (dispatch) => {
     dispatch({ type: "deleteTaskFail", payload: error.response.data.message });
   }
 };
+
+// Update Profile Action
+export const updateProfile = (formdata) => async (dispatch) => {
+  try {
+    dispatch({ type: "updateProfileRequest" });
+
+    const { data } = await axios.put(`${server}/updateprofile`, formdata, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      withCredentials: true,
+    });
+    dispatch({ type: "updateProfileSuccess", payload: data.message });
+  } catch (error) {
+    dispatch({
+      type: "updateProfileFail",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// Change Password Action
+export const changePassword =
+  (oldPassword, newPassword) => async (dispatch) => {
+    try {
+      dispatch({ type: "updatePasswordRequest" });
+
+      const { data } = await axios.put(
+        `${server}/updatepassword`,
+        { oldPassword, newPassword },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+      dispatch({ type: "updatePasswordSuccess", payload: data.message });
+    } catch (error) {
+      dispatch({
+        type: "updatePasswordFail",
+        payload: error.response.data.message,
+      });
+    }
+  };

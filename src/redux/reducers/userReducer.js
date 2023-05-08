@@ -131,6 +131,32 @@ export const messageReducer = createReducer(
       state.error = action.payload;
     },
 
+    // Update Profile Request
+    updateProfileRequest: (state) => {
+      state.loading = true;
+    },
+    updateProfileSuccess: (state, action) => {
+      state.loading = false;
+      state.message = action.payload;
+    },
+    updateProfileFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+    // Update Password Request
+    updatePasswordRequest: (state) => {
+      state.loading = true;
+    },
+    updatePasswordSuccess: (state, action) => {
+      state.loading = false;
+      state.message = action.payload;
+    },
+    updatePasswordFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
     // Clear reducer
     clearError: (state) => {
       state.error = null;

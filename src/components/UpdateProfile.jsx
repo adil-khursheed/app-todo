@@ -1,11 +1,52 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loadUser, updateProfile } from "../redux/actions/userAction";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const UpdateProfile = () => {
-  const [name, setName] = useState("");
+  const { user } = useSelector((state) => state.user);
+  const [name, setName] = useState(user.name);
+  const [imagePrev, setImagePrev] = useState(user.avatar.url);
+  const [image, setImage] = useState("");
 
-  const changeImageHandler = () => {};
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const updateHandler = () => {};
+  const changeImageHandler = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.readAsDataURL(file);
+
+    reader.onloadend = () => {
+      setImagePrev(reader.result);
+      setImage(file);
+    };
+  };
+
+  const updateProfileHandler = async (e) => {
+    e.preventDefault();
+    const myForm = new FormData();
+    myForm.append("name", name);
+    myForm.append("avatar", image);
+    await dispatch(updateProfile(myForm));
+    dispatch(loadUser());
+    navigate("/profile");
+  };
+
+  const { error, message } = useSelector((state) => state.message);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch({ type: "clearError" });
+    }
+    if (message) {
+      toast.success(message);
+      dispatch({ type: "clearMessage" });
+    }
+  }, [dispatch, error, message]);
 
   return (
     <>
@@ -14,11 +55,11 @@ const UpdateProfile = () => {
           Update Profile
         </h2>
         <form
-          onSubmit={updateHandler}
+          onSubmit={updateProfileHandler}
           className="flex flex-col items-center justify-center w-full gap-5 mb-6">
           <div className="w-28 h-28 rounded-full">
             <img
-              src="/user.png"
+              src={imagePrev ? imagePrev : "/user.png"}
               alt=""
               className="w-full h-full rounded-full object-cover object-top"
             />
