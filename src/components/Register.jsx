@@ -50,8 +50,8 @@ const Register = () => {
       </h2>
       <form
         onSubmit={submitHandler}
-        className="flex flex-col w-full gap-5 mb-6">
-        <div className="w-16 h-16 bg-Light-Grayish-Blue rounded-full">
+        className="flex flex-col items-center w-full gap-5 mb-6">
+        <div className="w-20 h-20 bg-Light-Grayish-Blue rounded-full">
           <img
             src={imagePrev ? imagePrev : "/user.png"}
             alt=""
@@ -63,16 +63,16 @@ const Register = () => {
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Your name"
-          className="h-[45px] px-4 rounded-[4px] bg-Very-Dark-Grayish-Blue dark:bg-Very-Light-Gray border-none outline-none text-Very-Light-Gray dark:text-Very-Dark-Desaturated-Blue"
+          className="w-full h-[45px] px-4 rounded-[4px] bg-Very-Dark-Grayish-Blue dark:bg-Very-Light-Gray border-none outline-none text-Very-Light-Gray dark:text-Very-Dark-Desaturated-Blue"
         />
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email address"
-          className="h-[45px] px-4 rounded-[4px] bg-Very-Dark-Grayish-Blue dark:bg-Very-Light-Gray border-none outline-none text-Very-Light-Gray dark:text-Very-Dark-Desaturated-Blue"
+          className="w-full h-[45px] px-4 rounded-[4px] bg-Very-Dark-Grayish-Blue dark:bg-Very-Light-Gray border-none outline-none text-Very-Light-Gray dark:text-Very-Dark-Desaturated-Blue"
         />
-        <div className="h-[45px] px-4 rounded-[4px] bg-Very-Dark-Grayish-Blue dark:bg-Very-Light-Gray text-Very-Light-Gray dark:text-Very-Dark-Desaturated-Blue flex items-center">
+        <div className="w-full h-[45px] px-4 rounded-[4px] bg-Very-Dark-Grayish-Blue dark:bg-Very-Light-Gray text-Very-Light-Gray dark:text-Very-Dark-Desaturated-Blue flex items-center">
           <input
             type={showPassword ? "text" : "password"}
             value={password}

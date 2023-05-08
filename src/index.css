@@ -43,4 +43,8 @@
       transform: scaleY(1);
     }
   }
+
+  .active {
+    @apply text-Bright-Blue;
+  }
 }

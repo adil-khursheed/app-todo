@@ -6,7 +6,6 @@ import { addTask, loadUser } from "../redux/actions/userAction";
 import { toast } from "react-hot-toast";
 
 const Home = () => {
-  const [activeBtn, setActiveBtn] = useState("");
   const [title, setTitle] = useState("");
 
   const { error, message } = useSelector((state) => state.message);
@@ -50,12 +49,12 @@ const Home = () => {
               taskId={task._id}
             />
           ))}
-        <div className="flex justify-between items-center px-4 h-[45px]">
+        <div className="relative flex justify-between items-center px-4 h-[45px]">
           <p className="text-sm text-Dark-Grayish-Blue">
             {user.tasks.length} items left
           </p>
-          <div className="text-sm text-Dark-Grayish-Blue font-bold hidden sm:flex gap-4">
-            <button>All</button>
+          <div className="absolute sm:relative w-full sm:w-0 -bottom-20 sm:bottom-0 rounded-[4px] left-0 text-sm text-Dark-Grayish-Blue font-bold flex justify-center gap-4 bg-Very-Light-Gray dark:bg-Very-Dark-Grayish-Blue sm:bg-transparent sm:dark:bg-transparent h-[60px] shadow-sm sm:shadow-none shadow-Light-Grayish-Blue dark:shadow-Very-Dark-Desaturated-Blue text-md">
+            <button className="active">All</button>
             <button>Active</button>
             <button>Completed</button>
           </div>
@@ -64,12 +63,7 @@ const Home = () => {
           </button>
         </div>
       </div>
-      <div className="w-full h-[60px] shadow-sm shadow-Light-Grayish-Blue dark:shadow-Very-Dark-Desaturated-Blue text-md text-Dark-Grayish-Blue font-bold flex justify-center mt-6 bg-Very-Light-Gray dark:bg-Very-Dark-Grayish-Blue sm:hidden gap-4">
-        <button>All</button>
-        <button>Active</button>
-        <button>Completed</button>
-      </div>
-      <div className="text-center text-[13px] mt-10 text-Dark-Grayish-Blue">
+      <div className="text-center text-[13px] mt-32 sm:mt-10 text-Dark-Grayish-Blue">
         <p>Drag and drop to reorder list</p>
       </div>
     </>

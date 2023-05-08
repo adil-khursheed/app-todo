@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Profile = ({ user }) => {
   return (
@@ -24,12 +25,16 @@ const Profile = ({ user }) => {
           </span>
         </p>
         <div className="flex gap-3 flex-col md:flex-row">
-          <button className="bg-Bright-Blue py-2 px-4 rounded-md text-sm pt-[11px]">
-            Update Profile
-          </button>
-          <button className="bg-Bright-Blue py-2 px-4 rounded-md text-sm pt-[11px]">
-            Change Password
-          </button>
+          <Link to={"/updateprofile"}>
+            <button className="bg-Bright-Blue py-2 px-4 rounded-md text-sm pt-[11px]">
+              Update Profile
+            </button>
+          </Link>
+          <Link to={"/changepassword"}>
+            <button className="bg-Bright-Blue py-2 px-4 rounded-md text-sm pt-[11px]">
+              Change Password
+            </button>
+          </Link>
         </div>
       </div>
     </div>

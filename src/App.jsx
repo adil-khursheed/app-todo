@@ -13,6 +13,8 @@ import Profile from "./components/Profile";
 import Loader from "./components/Loader";
 import Verify from "./components/Verify";
 import { ProtectedRoute } from "protected-route-react";
+import UpdateProfile from "./components/UpdateProfile";
+import ChangePassword from "./components/ChangePassword";
 
 const App = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme"));
@@ -129,8 +131,37 @@ const App = () => {
                   </ProtectedRoute>
                 }
               />
-              <Route path="/forgotpassword" element={<ForgotPassword />} />
+              <Route
+                path="/forgotpassword"
+                element={
+                  <ProtectedRoute
+                    isAuthenticated={!isAuthenticated}
+                    redirect={"/"}>
+                    <ForgotPassword />
+                  </ProtectedRoute>
+                }
+              />
               <Route path="/verify" element={<Verify />} />
+              <Route
+                path="/updateprofile"
+                element={
+                  <ProtectedRoute
+                    isAuthenticated={isAuthenticated}
+                    redirect={"/profile"}>
+                    <UpdateProfile />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/changepassword"
+                element={
+                  <ProtectedRoute
+                    isAuthenticated={isAuthenticated}
+                    redirect={"/profile"}>
+                    <ChangePassword />
+                  </ProtectedRoute>
+                }
+              />
             </Routes>
             <Toaster />
           </div>
