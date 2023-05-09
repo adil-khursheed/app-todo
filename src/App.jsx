@@ -15,6 +15,7 @@ import Verify from "./components/Verify";
 import { ProtectedRoute } from "protected-route-react";
 import UpdateProfile from "./components/UpdateProfile";
 import ChangePassword from "./components/ChangePassword";
+import ResetPassword from "./components/ResetPassword";
 
 const App = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme"));
@@ -136,8 +137,18 @@ const App = () => {
                 element={
                   <ProtectedRoute
                     isAuthenticated={!isAuthenticated}
-                    redirect={"/"}>
+                    redirect={"/resetpassword"}>
                     <ForgotPassword />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/resetpassword"
+                element={
+                  <ProtectedRoute
+                    isAuthenticated={!isAuthenticated}
+                    redirect={"/login"}>
+                    <ResetPassword />
                   </ProtectedRoute>
                 }
               />

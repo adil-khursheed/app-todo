@@ -181,3 +181,51 @@ export const changePassword =
       });
     }
   };
+
+// Forgot Password Action
+export const forgotPassword = (email) => async (dispatch) => {
+  try {
+    dispatch({ type: "forgotPasswordRequest" });
+
+    const { data } = await axios.post(
+      `${server}/forgotpassword`,
+      { email },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      }
+    );
+    dispatch({ type: "forgotPasswordSuccess", payload: data.message });
+  } catch (error) {
+    dispatch({
+      type: "forgotPasswordFail",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// Reset Password Action
+export const resetPassword = (otp, newPassword) => async (dispatch) => {
+  try {
+    dispatch({ type: "resetPasswordRequest" });
+
+    const { data } = await axios.put(
+      `${server}/resetpassword`,
+      { otp, newPassword },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      }
+    );
+    dispatch({ type: "resetPasswordSuccess", payload: data.message });
+  } catch (error) {
+    dispatch({
+      type: "resetPasswordFail",
+      payload: error.response.data.message,
+    });
+  }
+};
