@@ -16,6 +16,7 @@ import { ProtectedRoute } from "protected-route-react";
 import UpdateProfile from "./components/UpdateProfile";
 import ChangePassword from "./components/ChangePassword";
 import ResetPassword from "./components/ResetPassword";
+import Task from "./components/Task";
 
 const App = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme"));
@@ -58,6 +59,78 @@ const App = () => {
     (state) => state.user
   );
 
+  const tabs = [
+    {
+      id: "tab1",
+      label: "All",
+      content: (
+        <div>
+          {user && user.tasks.length <= 0 ? (
+            <p className="flex justify-center items-center py-6 text-Dark-Grayish-Blue text-lg">
+              No Tasks Yet
+            </p>
+          ) : (
+            user &&
+            user.tasks.map((task) => (
+              <Task
+                key={task._id}
+                title={task.title}
+                status={task.completed}
+                taskId={task._id}
+              />
+            ))
+          )}
+        </div>
+      ),
+    },
+    {
+      id: "tab2",
+      label: "Active",
+      content: (
+        <div>
+          {user && user.activeTasks.length <= 0 ? (
+            <p className="flex justify-center items-center py-6 text-Dark-Grayish-Blue text-lg">
+              No Active Tasks
+            </p>
+          ) : (
+            user &&
+            user.activeTasks.map((task) => (
+              <Task
+                key={task._id}
+                title={task.title}
+                status={task.completed}
+                taskId={task._id}
+              />
+            ))
+          )}
+        </div>
+      ),
+    },
+    {
+      id: "tab3",
+      label: "Completed",
+      content: (
+        <div>
+          {user && user.completedTasks.length <= 0 ? (
+            <p className="flex justify-center items-center py-6 text-Dark-Grayish-Blue text-lg">
+              No Completed Tasks
+            </p>
+          ) : (
+            user &&
+            user.completedTasks.map((task) => (
+              <Task
+                key={task._id}
+                title={task.title}
+                status={task.completed}
+                taskId={task._id}
+              />
+            ))
+          )}
+        </div>
+      ),
+    },
+  ];
+
   useEffect(() => {
     if (error) {
       toast.error(error);
@@ -98,7 +171,7 @@ const App = () => {
                 path="/"
                 element={
                   <ProtectedRoute isAuthenticated={isAuthenticated}>
-                    <Home />
+                    <Home tabs={tabs} />
                   </ProtectedRoute>
                 }
               />

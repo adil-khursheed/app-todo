@@ -118,7 +118,7 @@ export const messageReducer = createReducer(
       state.error = action.payload;
     },
 
-    // Update Task Request
+    // Delete Task Request
     deleteTaskRequest: (state) => {
       state.loading = true;
     },
@@ -127,6 +127,19 @@ export const messageReducer = createReducer(
       state.message = action.payload;
     },
     deleteTaskFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+    // Delete Completed Task Request
+    deletecompletedTaskRequest: (state) => {
+      state.loading = true;
+    },
+    deletecompletedTaskSuccess: (state, action) => {
+      state.loading = false;
+      state.message = action.payload;
+    },
+    deletecompletedTaskFail: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },

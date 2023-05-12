@@ -10,6 +10,7 @@ const TodoInput = ({ addTaskHandler, title, setTitle }) => {
       </div>
       <input
         type="text"
+        autoFocus
         placeholder="Create a new todo..."
         value={title}
         onChange={(e) => setTitle(e.target.value)}

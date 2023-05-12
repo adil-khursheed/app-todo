@@ -7,9 +7,10 @@ const Task = ({ title, status, taskId }) => {
 
   const dispatch = useDispatch();
 
-  const handleCheckbox = () => {
+  const handleCheckbox = async () => {
     setCompleted(!completed);
-    dispatch(updateTask(taskId));
+    await dispatch(updateTask(taskId));
+    dispatch(loadUser());
   };
 
   const deleteTodoHandler = async () => {

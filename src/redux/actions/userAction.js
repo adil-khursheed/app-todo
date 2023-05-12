@@ -137,6 +137,23 @@ export const deleteTask = (taskId) => async (dispatch) => {
   }
 };
 
+// Delete Task Action
+export const deletecompletedTask = () => async (dispatch) => {
+  try {
+    dispatch({ type: "deletecompletedTaskRequest" });
+
+    const { data } = await axios.delete(`${server}/clearcompleted`, {
+      withCredentials: true,
+    });
+    dispatch({ type: "deletecompletedTaskSuccess", payload: data.message });
+  } catch (error) {
+    dispatch({
+      type: "deletecompletedTaskFail",
+      payload: error.response.data.message,
+    });
+  }
+};
+
 // Update Profile Action
 export const updateProfile = (formdata) => async (dispatch) => {
   try {
