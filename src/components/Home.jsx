@@ -7,8 +7,7 @@ import {
   loadUser,
 } from "../redux/actions/userAction";
 import { toast } from "react-hot-toast";
-import { DragDropContext } from "react-beautiful-dnd";
-import { StrictModeDroppable as Droppable } from "../helpers/StrictModeDroppable";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 const Home = ({ tabs }) => {
   const [title, setTitle] = useState("");
