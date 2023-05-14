@@ -71,12 +71,13 @@ const App = () => {
             </p>
           ) : (
             user &&
-            user.tasks.map((task) => (
+            user.tasks.map((task, index) => (
               <Task
                 key={task._id}
                 title={task.title}
                 status={task.completed}
                 taskId={task._id}
+                index={index}
               />
             ))
           )}
@@ -94,12 +95,13 @@ const App = () => {
             </p>
           ) : (
             user &&
-            user.activeTasks.map((task) => (
+            user.activeTasks.map((task, index) => (
               <Task
                 key={task._id}
                 title={task.title}
                 status={task.completed}
                 taskId={task._id}
+                index={index}
               />
             ))
           )}
@@ -117,12 +119,13 @@ const App = () => {
             </p>
           ) : (
             user &&
-            user.completedTasks.map((task) => (
+            user.completedTasks.map((task, index) => (
               <Task
                 key={task._id}
                 title={task.title}
                 status={task.completed}
                 taskId={task._id}
+                index={index}
               />
             ))
           )}
@@ -152,7 +155,7 @@ const App = () => {
       {loading ? (
         <Loader />
       ) : (
-        <div className="relative w-full h-screen bg-Very-Light-Gray dark:bg-Very-Dark-Blue">
+        <div>
           <header className="w-full h-64">
             <img
               src={
